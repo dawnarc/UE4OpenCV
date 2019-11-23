@@ -64,46 +64,46 @@ private:
 	cv::Mat frame, image;
 };
 
-class FOpenCVSmileImpl
-{
-	friend FOpenCVSmileWorker;
-
-public:
-	FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName);
-	~FOpenCVSmileImpl();
-
-	static TSharedRef<class FOpenCVSmileImpl, ESPMode::ThreadSafe> Get(FString CascadeName, FString NestedCascadeName);
-	static TSharedPtr<class FOpenCVSmileImpl, ESPMode::ThreadSafe> OpenCVSmileImplPtr;
-
-public:
-	static void StartCamera()
-	{
-		if (OpenCVSmileImplPtr.IsValid())
-		{
-			OpenCVSmileImplPtr->StartCameraInst();
-		}
-	}
-
-	static void StopCamera()
-	{
-		if (OpenCVSmileImplPtr.IsValid())
-		{
-			OpenCVSmileImplPtr->StopCameraInst();
-		}
-	}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~ Camera thread ~~~~~~~~~~~~~~~~~~~~~~~*/
-public:
-	void StartCameraInst();
-	void StopCameraInst();
-private:
-	std::atomic_bool bIsSmileThreadRunning;
-	std::thread CameraThread;
-	std::mutex mutex;
-
-	std::string CascadeName;
-	std::string NestedCascadeName;
-};
+//class FOpenCVSmileImpl
+//{
+//	friend FOpenCVSmileWorker;
+//
+//public:
+//	FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName);
+//	~FOpenCVSmileImpl();
+//
+//	static TSharedRef<class FOpenCVSmileImpl, ESPMode::ThreadSafe> Get(FString CascadeName, FString NestedCascadeName);
+//	static TSharedPtr<class FOpenCVSmileImpl, ESPMode::ThreadSafe> OpenCVSmileImplPtr;
+//
+//public:
+//	static void StartCamera()
+//	{
+//		if (OpenCVSmileImplPtr.IsValid())
+//		{
+//			OpenCVSmileImplPtr->StartCameraInst();
+//		}
+//	}
+//
+//	static void StopCamera()
+//	{
+//		if (OpenCVSmileImplPtr.IsValid())
+//		{
+//			OpenCVSmileImplPtr->StopCameraInst();
+//		}
+//	}
+//
+///*~~~~~~~~~~~~~~~~~~~~~~~~ Camera thread ~~~~~~~~~~~~~~~~~~~~~~~*/
+//public:
+//	void StartCameraInst();
+//	void StopCameraInst();
+//private:
+//	std::atomic_bool bIsSmileThreadRunning;
+//	std::thread CameraThread;
+//	std::mutex mutex;
+//
+//	std::string CascadeName;
+//	std::string NestedCascadeName;
+//};
 
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )

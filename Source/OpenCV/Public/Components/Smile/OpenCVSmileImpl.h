@@ -32,6 +32,7 @@ class FOpenCVSmileImpl
 {
 public:
 
+	FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName);
 	FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName, std::string CascadeGpuName, std::string NestedCascadeGpuName, bool useGPU);
 	FOpenCVSmileImpl(FOpenCVSmileImpl &&) {}
 	FOpenCVSmileImpl(const FOpenCVSmileImpl&) = default;
@@ -81,7 +82,7 @@ public:
 	void StopCameraInst();
 	const FOpenCVSmileFrame& GetOpenCVSmileFrame() { return OpenCVSmileFrame; }
 
-private:
+public:
 	std::atomic_bool bIsSmileThreadRunning;
 	std::thread CameraThread;
 	std::mutex mutex;
@@ -122,7 +123,7 @@ private:
 	std::vector<cv::Rect> nestedObjects;
 
 // CPU version
-private:
+public:
 	cv::Mat smallImgROI;
 	cv::CascadeClassifier cascade, nestedCascade;
 	cv::Mat frame, frame_cpu, gray_cpu, resized_cpu, frameDisp;

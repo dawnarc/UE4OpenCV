@@ -140,6 +140,14 @@ static void convertAndResize(const cv::cuda::GpuMat& src, cv::cuda::GpuMat& gray
 	}
 }
 
+FOpenCVSmileImpl::FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName)
+	: CascadeName(CascadeName), NestedCascadeName(NestedCascadeName)
+{
+	UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::FOpenCVSmileImpl()"));
+
+	bIsSmileThreadRunning = false;
+}
+
 FOpenCVSmileImpl::FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName, std::string CascadeGpuName, std::string NestedCascadeGpuName, bool useGPU)
 {
 	UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::FOpenCVSmileImpl()"));
