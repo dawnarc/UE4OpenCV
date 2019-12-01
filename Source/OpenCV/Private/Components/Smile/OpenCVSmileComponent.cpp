@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Components/Smile/OpenCVSmileComponent.h"
+#include "Components/Smile/OpenCVSmileImpl.h"
 
 using namespace std;
 
@@ -227,57 +228,57 @@ void FOpenCVSmileWorker::Shutdown()
 	}
 }
 
-TSharedPtr<FOpenCVSmileImpl, ESPMode::ThreadSafe> FOpenCVSmileImpl::OpenCVSmileImplPtr;
-TSharedRef<class FOpenCVSmileImpl, ESPMode::ThreadSafe> FOpenCVSmileImpl::Get(FString CascadeName, FString NestedCascadeName)
-{
-	if (!OpenCVSmileImplPtr.IsValid())
-	{
-		std::string cascadeName = std::string(TCHAR_TO_UTF8(*CascadeName));
-		std::string nestedCascadeName = std::string(TCHAR_TO_UTF8(*NestedCascadeName));
-		OpenCVSmileImplPtr = TSharedPtr<class FOpenCVSmileImpl, ESPMode::ThreadSafe>(new FOpenCVSmileImpl(cascadeName, nestedCascadeName));
-
-		check(OpenCVSmileImplPtr.IsValid());
-	}
-
-	return OpenCVSmileImplPtr.ToSharedRef();
-}
-
-FOpenCVSmileImpl::FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName)
-	: CascadeName(CascadeName), NestedCascadeName(NestedCascadeName)
-{
-	UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::FOpenCVSmileImpl()"));
-
-	bIsSmileThreadRunning = false;
-}
-
-FOpenCVSmileImpl::~FOpenCVSmileImpl()
-{
-	UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::~FOpenCVSmileImpl()"));
-	StopCameraInst();
-}
-
-void FOpenCVSmileImpl::StartCameraInst()
-{
-	if (bIsSmileThreadRunning == false) {
-		bIsSmileThreadRunning = true;
-		FOpenCVSmileWorker::JoyInit(this);
-	}
-}
-
-void FOpenCVSmileImpl::StopCameraInst()
-{
-	if (bIsSmileThreadRunning) {
-		bIsSmileThreadRunning = false;
-		FOpenCVSmileWorker::Shutdown();
-	}
-
-	if (OpenCVSmileImplPtr.IsValid())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::StopCameraInst() OpenCVSmileImplPtr.Reset()"));
-		OpenCVSmileImplPtr.Reset();
-		OpenCVSmileImplPtr = nullptr;
-	}
-}
+//TSharedPtr<FOpenCVSmileImpl, ESPMode::ThreadSafe> FOpenCVSmileImpl::OpenCVSmileImplPtr;
+//TSharedRef<class FOpenCVSmileImpl, ESPMode::ThreadSafe> FOpenCVSmileImpl::Get(FString CascadeName, FString NestedCascadeName)
+//{
+//	if (!OpenCVSmileImplPtr.IsValid())
+//	{
+//		std::string cascadeName = std::string(TCHAR_TO_UTF8(*CascadeName));
+//		std::string nestedCascadeName = std::string(TCHAR_TO_UTF8(*NestedCascadeName));
+//		OpenCVSmileImplPtr = TSharedPtr<class FOpenCVSmileImpl, ESPMode::ThreadSafe>(new FOpenCVSmileImpl(cascadeName, nestedCascadeName));
+//
+//		check(OpenCVSmileImplPtr.IsValid());
+//	}
+//
+//	return OpenCVSmileImplPtr.ToSharedRef();
+//}
+//
+//FOpenCVSmileImpl::FOpenCVSmileImpl(std::string CascadeName, std::string NestedCascadeName)
+//	: CascadeName(CascadeName), NestedCascadeName(NestedCascadeName)
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::FOpenCVSmileImpl()"));
+//
+//	bIsSmileThreadRunning = false;
+//}
+//
+//FOpenCVSmileImpl::~FOpenCVSmileImpl()
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::~FOpenCVSmileImpl()"));
+//	StopCameraInst();
+//}
+//
+//void FOpenCVSmileImpl::StartCameraInst()
+//{
+//	if (bIsSmileThreadRunning == false) {
+//		bIsSmileThreadRunning = true;
+//		FOpenCVSmileWorker::JoyInit(this);
+//	}
+//}
+//
+//void FOpenCVSmileImpl::StopCameraInst()
+//{
+//	if (bIsSmileThreadRunning) {
+//		bIsSmileThreadRunning = false;
+//		FOpenCVSmileWorker::Shutdown();
+//	}
+//
+//	if (OpenCVSmileImplPtr.IsValid())
+//	{
+//		UE_LOG(LogTemp, Warning, TEXT("FOpenCVSmileImpl::StopCameraInst() OpenCVSmileImplPtr.Reset()"));
+//		OpenCVSmileImplPtr.Reset();
+//		OpenCVSmileImplPtr = nullptr;
+//	}
+//}
 
 
 // Sets default values for this component's properties
@@ -301,7 +302,7 @@ void UOpenCVSmileComponent::BeginPlay()
 void UOpenCVSmileComponent::InitializeComponent()
 {
 	// initialize
-	FOpenCVSmileImpl::Get(CascadeName, NestedCascadeName);
+	//FOpenCVSmileImpl::Get(CascadeName, NestedCascadeName);
 	UE_LOG(LogTemp, Warning, TEXT("UOpenCVSmileComponent::InitializeComponent()"));
 
 }
