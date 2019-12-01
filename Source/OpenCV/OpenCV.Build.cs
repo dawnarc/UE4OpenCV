@@ -42,13 +42,13 @@ public class OpenCV : ModuleRules
         string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "Win32";
   
         string CudaDirectory = Environment.GetEnvironmentVariable("CUDA_PATH_V8_0");
-        string CudaDirectoryInclude = CudaDirectory + "include";
+        string CudaDirectoryInclude = CudaDirectory + "/include/";
         string CudaDirectoryLib = CudaDirectory + "/lib/" + PlatformString;
 
 
         PublicIncludePaths.AddRange(
 			new string[] {
-				"OpenCV/Public",
+				//"OpenCV/Public",
                 Path.Combine(ThirdPartyPath, "OpenCVSDK", "Include"),
                 Path.Combine(CudaDirectoryInclude),
             }

@@ -29,12 +29,12 @@ static void DetectSmile(cv::Mat& img, cv::CascadeClassifier& cascade, cv::Cascad
 	cv::resize(gray, smallImg, cv::Size(), fx, fx, cv::INTER_LINEAR_EXACT);
 	cv::equalizeHist(smallImg, smallImg);
 
-	//cascade.detectMultiScale(smallImg, faces,
-	//	1.1, 2, 0
-	//	//|CASCADE_FIND_BIGGEST_OBJECT
-	//	//|CASCADE_DO_ROUGH_SEARCH
-	//	| cv::CASCADE_SCALE_IMAGE,
-	//	cv::Size(30, 30));
+	cascade.detectMultiScale(smallImg, faces,
+		1.1, 2, 0
+		//|CASCADE_FIND_BIGGEST_OBJECT
+		//|CASCADE_DO_ROUGH_SEARCH
+		| cv::CASCADE_SCALE_IMAGE,
+		cv::Size(30, 30));
 
 
 	//if (tryflip)
